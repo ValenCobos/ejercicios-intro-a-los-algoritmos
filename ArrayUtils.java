@@ -103,10 +103,21 @@ public class ArrayUtils
     
     /**
      * Calcula la mediana de un arreglo de reales
+     * precondicion: todos los elementos del arreglo deben de estar ordenados.
      */
     public float mediana(float[] arreglo) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return 0;
+        if (arreglo == null){
+            throw new IllegalArgumentException("el arreglo no debe ser nulo");
+        }
+        assert ordenado(arreglo):"el arreglo no esta ordenado";
+        float num = 0;
+        if (arreglo.length % 2 == 1){
+            num = arreglo[arreglo.length / 2];
+        } else {
+            int arrDiv = (arreglo.length / 2);
+            num = arreglo[arrDiv] + arreglo[arrDiv-1];
+        }
+        return num; 
     }
     
     /**
@@ -153,8 +164,28 @@ public class ArrayUtils
      * Comprueba si un arreglo tiene dos valores cuya suma dé cero.
      */
     public boolean tieneOpuestos(float[] arreglo) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
+        if (arreglo == null){
+            throw new IllegalArgumentException("el arreglo no debe ser");
+        }
+        for (int i = 0; i < arreglo.length-1; i++){
+            if ((arreglo[i] + arreglo[i+1])==0){
+                return true;
+            }
+        }
         return false;
     }
     
+    public boolean ordenado(float [] arr){
+        if (arr == null){
+            throw new IllegalArgumentException (" el arreglo no debe ser nulo");
+        }
+        for (int i = 0; i < arr.length-1; i++){
+            if (arr [i] <= arr[i+1]){
+                return true;
+            } 
+        }
+        return false;
+    }
 }
+    
+
