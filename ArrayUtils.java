@@ -124,18 +124,21 @@ public class ArrayUtils
      * Comprueba si dos arreglos de enteros son iguales
      */
     public boolean iguales(int[] arr1, int[] arr2) {
+        if (arr1 == null || arr2 == null){
+            throw new IllegalArgumentException("uno de los arreglos es nulo");
+        }
         if (arr1.length != arr2.length){
             return false;
         } else {
             int i = 0;
-            boolean encontrado = true;
-            while (i < arr1.length && encontrado){
+            boolean iguales = true;
+            while (i < arr1.length && iguales){
                 if (arr1[i] != arr2[i]){
-                    encontrado = false;
+                    iguales = false;
                 }
                 i++;
             }
-            return encontrado;
+            return iguales;
         }  
     }
     
@@ -146,18 +149,19 @@ public class ArrayUtils
         if (arreglo == null){
             throw new IllegalArgumentException("el arreglo no debe ser nulo");
         }
-        int i = 0;
-        int num = arreglo [0];
-        boolean rep = false;
-        while (i < arreglo.length && !rep){
-            if (num == arreglo[i]){
-                rep = true;
-            } else {
-                rep = false;
-            }
-            i++;
+        if (arreglo.length < 2){
+            throw new IllegalArgumentException("el arreglo debe tener al menos 2 elementos");
         }
-        return rep;
+        for(int i = 0; i < arreglo.length-1; i++){
+            for(int j = i + 1; j < arreglo.length; j++){
+                int test = arreglo[i];
+                int test1 = arreglo[j];
+                if (arreglo[i] == arreglo[j]){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     /**
@@ -165,11 +169,13 @@ public class ArrayUtils
      */
     public boolean tieneOpuestos(float[] arreglo) {
         if (arreglo == null){
-            throw new IllegalArgumentException("el arreglo no debe ser");
+            throw new IllegalArgumentException("el arreglo no debe ser nulo");
         }
         for (int i = 0; i < arreglo.length-1; i++){
-            if ((arreglo[i] + arreglo[i+1])==0){
+            for (int j = i + 1; j < arreglo.length; j++) {
+                if (arreglo[i] + arreglo[j] == 0){
                 return true;
+                }
             }
         }
         return false;
@@ -186,6 +192,41 @@ public class ArrayUtils
         }
         return false;
     }
-}
     
+    public boolean TestB(int [] arr){
+    int firstElement = arr[0]; // Obtener el primer elemento
+        
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] != firstElement) {
+                // Si algún elemento es diferente del primer elemento, devuelve false
+                return false;
+            }
+        }
+        
+        // Si no se encontró ningún elemento diferente, devuelve true
+        return true;
+    }
+    public boolean verificarExpresion(int[] a) {
+        int n = a.length;
+        for (int i = 1; i <= n; i++) {
+            if (a[n - 1] != a[n - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+            
+    public static boolean compareElements(int[] arr, int i) {
+        int n = arr.length;
+        
+        // Verificar si i está dentro del rango adecuado
+        if (i < 0 || i >= n) {
+            System.out.println("El índice i está fuera del rango.");
+            return false;
+        }
+        
+        // Comparar el elemento en la posición n con el elemento en la posición n - i
+        return arr[n - 1] == arr[n - 1 - i];
+    }
+}
 

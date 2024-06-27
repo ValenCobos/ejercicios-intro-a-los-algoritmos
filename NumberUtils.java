@@ -15,50 +15,89 @@ public class NumberUtils
      * Comprueba si un número es primo.
      */
     public boolean esPrimo(int n) {
-        if (n <= 1){
+    if (n <= 1) {
         return false;
+    }
+        for (int i = 2; i <= n / 2; i++) {
+        if (n % i == 0) {
+            return false;
         }
-        if
+        }
+        return true;
     }
     
     /**
      * Comprueba si un número es compuesto.
      */
     public boolean esCompuesto(int n) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return false;
+        if (n <= 1){
+            return false;
+        }
+        if (esPrimo(n)){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
      * Calcula el máximo común divisor de dos números.
      */
     public int maximoComunDivisor(int n, int m) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return 0;
+        int mcd = 1;
+        int min = minimo(n, m);
+    
+        for(int i = 1; i <= min; i++){
+            if (n % i == 0 && m % i == 0){
+                mcd = i;
+            }
+        }
+        return mcd;
     }
 
     /**
      * Calcula el mínimo común múltiplo de dos números.
      */
     public int minimoComunMultiplo(int n, int m) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return 0;
+        int mcm = 0;
+        if (n == 0 || m == 0){
+            mcm = 0;
+        } else {
+            mcm = (n*m) / maximoComunDivisor(n,m);
+        }
+        return mcm;
     }
     
     /**
      * Calcula los divisores de un número.
+     * Precondicion: n debe ser un numero positivo.
      */
     public ArrayList<Integer> divisores(int n) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return null;
+        if (n < 0){
+            throw new IllegalArgumentException("el numero debe ser positivo");
+        }
+        ArrayList<Integer> divisoresDe = new ArrayList<Integer>();
+        for (int i = 1; i <= n; i++){
+            int numero = i;
+            if (n % numero == 0){
+                divisoresDe.add(i);
+            }
+        }
+        return divisoresDe;
     }
+    
     
     /**
      * Calcula los primeros n números primos
      */
     public int[] primos(int n) {
-        //TODO: Completar la implementación, reemplazando la línea siguiente
-        return null;
+        int [] numeros = new int [n];
+        for (int i = 0; i < numeros.length; i++){
+            if (esPrimo(i)){
+                numeros[i]= i;
+            }
+        }
+        return numeros;
     }
     
     /**
@@ -141,5 +180,11 @@ public class NumberUtils
         //TODO: Completar la implementación, reemplazando la línea siguiente
         return false;
     }
-    
+    private int minimo(int a, int b){
+        if (a < b){
+            return a;
+        }else{
+            return b;
+        }
+    }
 }
